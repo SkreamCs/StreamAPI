@@ -1,8 +1,11 @@
+package HomeworkTwo;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
+
     public static void main(String[] args) {
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
         List<String> families = Arrays.asList("Evans", "Young", "Harris", "Wilson", "Davies", "Adamson", "Brown");
@@ -27,12 +30,14 @@ public class Main {
                 .collect(Collectors.toList());
         System.out.println(FIO.size());
         List<String> job = persons.stream()
-                .filter(x -> ( (x.getEducation().equals(Education.HIGHER)) ?
-                                ( (x.getSex().equals(Sex.WOMAN)) ? x.getAge() > 18 && x.getAge() < 65 : (x.getSex().equals(Sex.MAN)) ? x.getAge() > 18 && x.getAge() < 60 : false )
-                                 : false ) )
+                .filter(x -> x.getEducation().equals(Education.HIGHER))
+                .filter(x -> x.getAge() > 18)
+                .filter(x -> (x.getSex().equals(Sex.WOMAN)) ?
+                        (x.getAge() > 18 && x.getAge() < 65) : (x.getAge() > 18 && x.getAge() < 60))
                 .sorted(Comparator.comparing(x -> x.getFamily().length()))
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
         System.out.println(job);
     }
 }
+
